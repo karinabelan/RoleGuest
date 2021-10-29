@@ -13,7 +13,7 @@ namespace DAL.ADO
     public class AddressInfoADO : IClientDAL<AddressInfoDTO>
     {
         List<AddressInfoDTO> addressInfo;
-        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=Guest;Integrated Security=True;";
+        private string connStr = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=Guest;Integrated Security=True;";
         public AddressInfoADO()
         {
             addressInfo = new List<AddressInfoDTO>();
@@ -24,23 +24,26 @@ namespace DAL.ADO
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(this.conn))
-                    using (SqlCommand comm = conn.CreateCommand())
+                    using (SqlConnection conn = new SqlConnection(connStr))
                     {
-                        conn.Open();
-                        comm.CommandText = "SELECT [AddressID],[Country],[City]FROM [RoleGuest].[dbo].[AddressInfo] ";
-
-                        SqlDataReader reader = comm.ExecuteReader();
-                        while (reader.Read())
+                        using (SqlCommand comm = conn.CreateCommand())
                         {
-                            addressInfo.Add(new AddressInfoDTO
+                            conn.Open();
+                            comm.CommandText = "SELECT [AddressID],[Country],[City]FROM [RoleGuest].[dbo].[AddressInfo] ";
+
+                            SqlDataReader reader = comm.ExecuteReader();
+                            while (reader.Read())
                             {
-                                AddressID = (int)reader["AddressID"],
-                                Country = reader["Country"].ToString(),
-                                City = reader["City"].ToString()
-                            });
+                                addressInfo.Add(new AddressInfoDTO
+                                {
+                                    AddressID = (int)reader["AddressID"],
+                                    Country = reader["Country"].ToString(),
+                                    City = reader["City"].ToString()
+                                });
+                            }
                         }
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -52,15 +55,17 @@ namespace DAL.ADO
         {
             return addressInfo;
         }
+
         public void Add(AddressInfoDTO u)
         {
             addressInfo.Add(u);
 
-            using (SqlConnection connectionSql = new SqlConnection(conn))
+            using (SqlConnection connectionSql = new SqlConnection(connStr))
             {
-                using (SqlCommand comm = new SqlCommand("insert into AddressInfo(Country,City) values (@country, @city)",connectionSql))
+                using (SqlCommand comm = connectionSql.CreateCommand())
                 {
                     connectionSql.Open();
+                    comm.CommandText = "INSERT INTO AddressInfo(Country, City) VALUES(@country, @city)";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@country", u.Country);
                     comm.Parameters.AddWithValue("@city", u.City);

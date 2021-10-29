@@ -86,6 +86,19 @@ namespace DAL.ADO
                     temp.ChangePassword(newValue);
                 }
             }
+            using (SqlConnection connectionSql = new SqlConnection(conn))
+            {
+                using (SqlCommand comm = connectionSql.CreateCommand())
+                {
+                    connectionSql.Open();
+                    comm.CommandText = "update Client set Password=@newPassword where FirstName=@FN and LastName=@LN";
+                    comm.Parameters.Clear();
+                    comm.Parameters.AddWithValue("@newPassword", newValue);
+                    comm.Parameters.AddWithValue("@FN", clientTemp.FirstName);
+                    comm.Parameters.AddWithValue("@LN", clientTemp.LastName);
+                    int row = comm.ExecuteNonQuery();
+                }
+            }
         }
 
         public ClientDTO GetByID(int ID)
