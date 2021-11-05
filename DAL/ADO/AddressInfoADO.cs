@@ -74,6 +74,7 @@ namespace DAL.ADO
                 }
             }
         }
+
         public void Change(int ID, string newValue)
         {
             throw new NotImplementedException();
