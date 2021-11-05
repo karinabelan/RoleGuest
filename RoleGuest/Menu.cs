@@ -72,34 +72,39 @@ Select option:
                         }
                         break;
                     case "2":
-                        //Console.Write("\nFirstName:");
-                        //string FirstNameStr = Console.ReadLine();
-                        //Console.Write("\nLastName:");
-                        //string LastNameStr = Console.ReadLine();
-                        //Console.Write("\nLogin:");
-                        //string LoginStr = Console.ReadLine();
-                        //Console.Write("\nPassword:");
-                        //string PasswordStr = Console.ReadLine();
+                        Console.Write("\nFirstName:");
+                        string FirstNameStr = Console.ReadLine();
+                        Console.Write("\nLastName:");
+                        string LastNameStr = Console.ReadLine();
+                        Console.Write("\nLogin:");
+                        string LoginStr = Console.ReadLine();
+                        Console.Write("\nPassword:");
+                        string PasswordStr = Console.ReadLine();
                         Console.Write("\nCountry:");
                         string CountryStr = Console.ReadLine();
                         Console.Write("\nCity:");
                         string CityStr = Console.ReadLine();
-                        //InfoDTO infoDTO = new InfoDTO();
+                        //Console.Write("\nID:");
+                        //int IDStr = Convert.ToInt32(Console.ReadLine());
+
+                        InfoDTO infoDTO = new InfoDTO();
+
 
                         AddressInfoDTO addressInfoDTO = new AddressInfoDTO();
                         addressInfoDTO.Country = CountryStr;
                         addressInfoDTO.City = CityStr;
                         addressInfo.Add(addressInfoDTO);
-                        //infoDTO.AddressID = addressInfoDTO.AddressID;
-                        //info.Add(infoDTO);
-                        //ClientDTO clients = new ClientDTO();
+                        //infoDTO.InfoID =IDStr;
+                        infoDTO.AddressID = addressInfoDTO.AddressID;
+                        info.Add(infoDTO);
+                        ClientDTO clients = new ClientDTO();
 
-                        //clients.FirstName = FirstNameStr;
-                        //clients.LastName = LastNameStr;
-                        //clients.Login = LoginStr;
-                        //clients.Password = PasswordStr;
-                        //clients.InfoID = infoDTO.InfoID;
-                        //client.Add(clients);
+                        clients.FirstName = FirstNameStr;
+                        clients.LastName = LastNameStr;
+                        clients.Login = LoginStr;
+                        clients.Password = PasswordStr;
+                        clients.InfoID = infoDTO.InfoID;
+                        client.Add(clients);
                         Console.WriteLine("Return and log in!\n");
                         Console.ReadKey();
                         break;

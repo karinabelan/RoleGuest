@@ -13,7 +13,7 @@ namespace DAL.ADO
     public class AddressInfoADO : IClientDAL<AddressInfoDTO>
     {
         List<AddressInfoDTO> addressInfo;
-        private string connStr = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=Guest;Integrated Security=True;";
+        private string connStr = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True;";
         public AddressInfoADO()
         {
             addressInfo = new List<AddressInfoDTO>();
@@ -25,6 +25,7 @@ namespace DAL.ADO
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connStr))
+ 
                     {
                         using (SqlCommand comm = conn.CreateCommand())
                         {

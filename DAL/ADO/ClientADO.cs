@@ -12,7 +12,7 @@ namespace DAL.ADO
     public class ClientADO : IClientDAL<ClientDTO>
     {
         List<ClientDTO> client;
-        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True;";
         public ClientADO()
         {
             client = new List<ClientDTO>();

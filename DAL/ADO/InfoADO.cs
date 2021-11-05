@@ -12,7 +12,7 @@ namespace DAL.ADO
     public class InfoADO : IClientDAL<InfoDTO>
     {
         List<InfoDTO> info;
-        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=Guest;Integrated Security=True;";
+        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True;";
         public InfoADO()
         {
             info = new List<InfoDTO>();
@@ -77,7 +77,15 @@ namespace DAL.ADO
         }
         public InfoDTO GetByID(int ID)
         {
-            throw new NotImplementedException();
+            int index = 0;
+            for (int i = 0; i < info.Count; i++)
+            {
+                if (info[i].InfoID == ID)
+                {
+                    index = i;
+                }
+            }
+            return info[index];
         }
     }
 }
