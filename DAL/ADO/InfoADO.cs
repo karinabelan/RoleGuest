@@ -12,7 +12,7 @@ namespace DAL.ADO
     public class InfoADO : IClientDAL<InfoDTO>
     {
         List<InfoDTO> info;
-        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True;";
+        private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
         public InfoADO()
         {
             info = new List<InfoDTO>();
