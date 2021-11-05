@@ -89,12 +89,27 @@ Select option:
                                                 Console.Write("\nFirstName:");
                                                 string firstName1 = Console.ReadLine();
 
-                                                Console.Write("\nInput new password:");
-                                                string name1 = Console.ReadLine();
-                                                client.Change(index1, name1, firstName1);
 
-                                                Console.WriteLine("sucessfully changed!\n");
-                                                Console.ReadKey();
+                                                bool isLogin1 = false;
+                                                foreach (ClientDTO temp in client.GetAll())
+                                                {
+                                                    if (temp.Login == login1 && temp.FirstName == firstName1)
+                                                    {
+                                                        isLogin1 = true;
+                                                    }
+
+                                                }
+                                                if (isLogin1)
+                                                {
+                                                    Console.Write("\nInput new password:");
+                                                    string name1 = Console.ReadLine();
+                                                    client.Change(index1, name1, login1, firstName1);
+                                                    Console.WriteLine("sucessfully changed!\n");
+                                                    Console.ReadKey();
+                                                }
+                                                else
+                                                    Console.WriteLine("Wrong login or first name\n");
+
                                             }
 
                                             break;
@@ -158,22 +173,22 @@ Select option:
                         break;
                     case "3":
                         {
-                            /////////add  data verification
-                            Console.WriteLine("Change password: ");
+                        //    /////////add  data verification
+                        //    Console.WriteLine("Change password: ");
 
-                            Console.Write("\nID:");
-                            int index = Convert.ToInt32(Console.ReadLine());
-                            Console.Write("\nLogin:");
-                            string login = Console.ReadLine();
-                            Console.Write("\nFirstName:");
-                            string firstName = Console.ReadLine();
+                        //    Console.Write("\nID:");
+                        //    int index = Convert.ToInt32(Console.ReadLine());
+                        //    Console.Write("\nLogin:");
+                        //    string login = Console.ReadLine();
+                        //    Console.Write("\nFirstName:");
+                        //    string firstName = Console.ReadLine();
 
-                            Console.Write("\nInput new password:");
-                            string name = Console.ReadLine();
-                            client.Change(index, name, firstName);
+                        //    Console.Write("\nInput new password:");
+                        //    string name = Console.ReadLine();
+                        //    client.Change(index, name, firstName,);
 
-                            Console.WriteLine("sucessfully changed!\n");
-                            Console.ReadKey();
+                        //    Console.WriteLine("sucessfully changed!\n");
+                        //    Console.ReadKey();
                         }
                         break;
                     case "0":

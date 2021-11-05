@@ -76,7 +76,7 @@ namespace DAL.ADO
             }
         }
 
-        public void Change(int ID, string newValue, string newValue2)
+        public void Change(int ID, string newValue, string newValue2, string newValue3)
         {
             var clientTemp = GetByID(ID);
             foreach (ClientDTO temp in client)
