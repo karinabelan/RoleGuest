@@ -71,7 +71,7 @@ namespace DAL.ADO
             }
         }
 
-        public void Change(int ID, string newValue)
+        public void Change(int ID, string newValue, string newValue2)
         {
             throw new NotImplementedException();
         }
