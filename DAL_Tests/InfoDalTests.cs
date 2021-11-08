@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using DAL.Interface;
+using DTO;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,17 @@ namespace DAL_Tests
 
     public class InfotDalTests
     {
+        IClientDAL<InfoDTO> info;
         [Test]
-        public void GetAllTest()
+        public void Test_GetByID()
         {
+            InfoDTO temp = new InfoDTO();
+            int countOfVisit = 1;
+            temp.CountOfVisit = countOfVisit;
+            temp.InfoID = 1;//current
 
+            InfoDTO exepObj = info.GetByID(temp.InfoID);
+            Assert.AreEqual(exepObj.InfoID, temp.InfoID);
         }
     }
 }

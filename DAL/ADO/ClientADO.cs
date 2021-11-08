@@ -42,7 +42,7 @@ namespace DAL.ADO
                                 LastName = reader["LastName"].ToString()
                                 //RowInsertTime =(DateTime) reader["RowInsertTime"],
                                 //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
-                        });
+                            });
                         }
                     }
                 }
