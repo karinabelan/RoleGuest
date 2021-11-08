@@ -22,9 +22,25 @@ namespace DTO
         {
             Password = newPass;
         }
+        //public ClientDTO(string Login, string Password, string FirstName, string LastName, int InfoId, DateTime RowInsertTime, DateTime RowUpdateTime, int PersonId = 0)
+        //{
+        //    this.FirstName = FirstName;
+        //    this.LastName = LastName;
+        //    this.Login = Login;
+        //    this.Password = Password;
+        //    this.InfoID = InfoId;
+        //    this.PersonID= PersonId;
+        //    this.RowInsertTime = RowInsertTime;
+        //    this.RowUpdateTime = RowUpdateTime;
+        //}
         public string InfoString()
         {
             return $"PersonID: {PersonID}\tLogin: {Login}\tPassword: {Password}";
+        }
+
+        public void Add(ClientDTO clients)
+        {
+            throw new NotImplementedException();
         }
     }
 }

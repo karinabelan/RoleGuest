@@ -15,6 +15,14 @@ namespace DTO
         public DateTime RowUpdateTime { get; set; }
 
 
+        //public AddressInfoDTO(string Country, string City, DateTime RowInsertTime, DateTime RowUpdateTime, int AddressId = 0)
+        //{
+        //    this.Country = Country;
+        //    this.City = City;
+        //    this.AddressID = AddressId;
+        //    this.RowInsertTime = RowInsertTime;
+        //    this.RowUpdateTime = RowUpdateTime;
+        //}
         public string InfoString()
         {
             return $"Country: {Country}\tSity: {City}";

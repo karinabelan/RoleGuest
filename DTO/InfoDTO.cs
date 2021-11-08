@@ -15,7 +15,15 @@ namespace DTO
         public DateTime RowInsertTime { get; set; }
         public DateTime RowUpdateTime { get; set; }
 
-
+        //public InfoDTO(int CountOfVisit, int Discount, int AddressId, DateTime RowInsertTime, DateTime RowUpdateTime, int InfoId = 0)
+        //{
+        //    this.CountOfVisit = CountOfVisit;
+        //    this.Discount = Discount;
+        //    this.AddressID = AddressId;
+        //    this.InfoID = InfoId;
+        //    this.RowInsertTime = RowInsertTime;
+        //    this.RowUpdateTime = RowUpdateTime;
+        //}
         public string InfoString()
         {
             return $"Discount: {Discount}";

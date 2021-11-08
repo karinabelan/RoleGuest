@@ -39,9 +39,9 @@ namespace DAL.ADO
                                 {
                                     AddressID = (int)reader["AddressID"],
                                     Country = reader["Country"].ToString(),
-                                    City = reader["City"].ToString()
-                                    //RowInsertTime = (DateTime)reader["RowInsertTime"],
-                                    //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
+                                    City = reader["City"].ToString(),
+                                    RowInsertTime = (DateTime)reader["RowInsertTime"],
+                                    RowUpdateTime = (DateTime)reader["RowUpdateTime"]
                                 });
                             }
                         }
