@@ -170,11 +170,16 @@ Select option:
                             string CountryStr = Console.ReadLine();
                             Console.Write("\nCity:");
                             string CityStr = Console.ReadLine();
-                            //Console.Write("\nID:");
-                            //int IDStr = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("\nInfoID:");
+                            int InfoIDStr = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("\nAddressID:");
+                            int AddressIDStr = Convert.ToInt32(Console.ReadLine());
+                            int countOfVisitStr = 1;
+                            int discountStr = 1;
 
                             InfoDTO infoDTO = new InfoDTO();
-
+                            infoDTO.CountOfVisit = countOfVisitStr;
+                            infoDTO.Discount = discountStr;
                             infoDTO.RowInsertTime = DateTime.Now;
                             infoDTO.RowUpdateTime = DateTime.Now;
 
@@ -184,7 +189,7 @@ Select option:
                             addressInfoDTO.RowInsertTime = DateTime.Now;
                             addressInfoDTO.RowUpdateTime = DateTime.Now;
                             addressInfo.Add(addressInfoDTO);
-                            //infoDTO.InfoID =IDStr;
+                            infoDTO.InfoID =InfoIDStr;
                             infoDTO.AddressID = addressInfoDTO.AddressID;
                             info.Add(infoDTO);
 
