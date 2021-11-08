@@ -25,7 +25,7 @@ namespace DAL.ADO
                 using (SqlConnection conn = new SqlConnection(this.conn))
                 using (SqlCommand comm = conn.CreateCommand())
                 {
-                    comm.CommandText = "SELECT  [InfoID],[CountOfVisit],[Discount],[AddressID] FROM [RoleGuest].[dbo].[Info] ";
+                    comm.CommandText = "SELECT  [InfoID],[CountOfVisit],[Discount],[AddressID],[RowInsertTime],[RowInsertTime] FROM [RoleGuest].[dbo].[Info] ";
                     conn.Open();
                     SqlDataReader reader = comm.ExecuteReader();
 
@@ -36,7 +36,9 @@ namespace DAL.ADO
                             InfoID = (int)reader["InfoID"],
                             CountOfVisit = (int)reader["CountOfVisit"],
                             Discount = (int)reader["Discount"],
-                            AddressID = (int)reader["AddressID"],
+                            AddressID = (int)reader["AddressID"]
+                            //RowInsertTime = (DateTime)reader["RowInsertTime"],
+                            //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
                         });
                     }
 
@@ -60,11 +62,13 @@ namespace DAL.ADO
                 using (SqlCommand comm = connectionSql.CreateCommand())
                 {
                     connectionSql.Open();
-                    comm.CommandText = "INSERT INTO Info(CountOfVisit,Discount,AddressID) VALUES(@COV,@discount,@adrID)";
+                    comm.CommandText = "INSERT INTO Info(CountOfVisit,Discount,AddressID, RowInsertTime,RowUpdateTime) VALUES(@COV,@discount,@adrID, @insertTime, @updateTime)";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@COV", u.CountOfVisit);
                     comm.Parameters.AddWithValue("@discount", u.Discount);
                     comm.Parameters.AddWithValue("@adrID", u.AddressID);
+                    comm.Parameters.AddWithValue("@insertTime", u.RowInsertTime);
+                    comm.Parameters.AddWithValue("@updateTime", u.RowUpdateTime);
                     comm.ExecuteNonQuery();
                     //bool T = true;
                 }

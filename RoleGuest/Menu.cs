@@ -2,10 +2,6 @@
 using DAL.Interface;
 using DTO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoleGuest
 {
@@ -68,6 +64,7 @@ Select option:
 2.Settings                                       
 0.Log out
 
+
 ");
                                     string userInput1 = Console.ReadLine();
                                     switch (userInput1)
@@ -79,37 +76,64 @@ Select option:
                                             break;
                                         case "2":
                                             {
+
                                                 /////////add  data verification
-                                                Console.WriteLine("Change password: ");
-
-                                                Console.Write("\nID:");
-                                                int index1 = Convert.ToInt32(Console.ReadLine());
-                                                Console.Write("\nLogin:");
-                                                string login1 = Console.ReadLine();
-                                                Console.Write("\nFirstName:");
-                                                string firstName1 = Console.ReadLine();
-
-
-                                                bool isLogin1 = false;
-                                                foreach (ClientDTO temp in client.GetAll())
+                                                Console.WriteLine("Change password? ");
+                                                while (true)
                                                 {
-                                                    if (temp.Login == login1 && temp.FirstName == firstName1)
+                                                    bool isExit2 = false;
+                                                    Console.WriteLine(@" 
+1.Yes
+2.No
+
+");
+                                                    string userInput2 = Console.ReadLine();
+                                                    switch (userInput2)
                                                     {
-                                                        isLogin1 = true;
-                                                    }
+                                                        case "1":
+                                                            {
+                                                                Console.Write("\nID:");
+                                                                int index1 = Convert.ToInt32(Console.ReadLine());
+                                                                Console.Write("\nLogin:");
+                                                                string login1 = Console.ReadLine();
+                                                                Console.Write("\nFirstName:");
+                                                                string firstName1 = Console.ReadLine();
 
-                                                }
-                                                if (isLogin1)
-                                                {
-                                                    Console.Write("\nInput new password:");
-                                                    string name1 = Console.ReadLine();
-                                                    client.Change(index1, name1, login1, firstName1);
-                                                    Console.WriteLine("sucessfully changed!\n");
-                                                    Console.ReadKey();
-                                                }
-                                                else
-                                                    Console.WriteLine("Wrong login or first name\n");
 
+                                                                bool isLogin1 = false;
+                                                                foreach (ClientDTO temp in client.GetAll())
+                                                                {
+                                                                    if (temp.Login == login1 && temp.FirstName == firstName1)
+                                                                    {
+                                                                        isLogin1 = true;
+                                                                    }
+
+                                                                }
+                                                                if (isLogin1)
+                                                                {
+                                                                    Console.Write("\nInput new password:");
+                                                                    string name1 = Console.ReadLine();
+                                                                    client.Change(index1, name1, login1, firstName1);
+                                                                    Console.WriteLine("sucessfully changed!\n");
+                                                                    Console.ReadKey();
+                                                                }
+                                                                else
+                                                                    Console.WriteLine("Wrong login or first name\n");
+                                                            }
+                                                            isExit2 = true;
+                                                            break;
+                                                        case "2":
+                                                            isExit2 = true;
+                                                            break;
+                                                        default:
+                                                            {
+                                                                Console.WriteLine("Error! Try again!");
+                                                            }
+                                                            break;
+                                                    };
+                                                    if (isExit2)
+                                                        break;
+                                                }                                             
                                             }
 
                                             break;
@@ -151,21 +175,30 @@ Select option:
 
                             InfoDTO infoDTO = new InfoDTO();
 
+                            infoDTO.RowInsertTime = DateTime.Now;
+                            infoDTO.RowUpdateTime = DateTime.Now;
 
                             AddressInfoDTO addressInfoDTO = new AddressInfoDTO();
                             addressInfoDTO.Country = CountryStr;
                             addressInfoDTO.City = CityStr;
+                            addressInfoDTO.RowInsertTime = DateTime.Now;
+                            addressInfoDTO.RowUpdateTime = DateTime.Now;
                             addressInfo.Add(addressInfoDTO);
                             //infoDTO.InfoID =IDStr;
                             infoDTO.AddressID = addressInfoDTO.AddressID;
                             info.Add(infoDTO);
-                            ClientDTO clients = new ClientDTO();
 
+
+                            ClientDTO clients = new ClientDTO();
                             clients.FirstName = FirstNameStr;
                             clients.LastName = LastNameStr;
                             clients.Login = LoginStr;
                             clients.Password = PasswordStr;
                             clients.InfoID = infoDTO.InfoID;
+
+                            clients.RowInsertTime = DateTime.Now;
+                            clients.RowUpdateTime = DateTime.Now;
+
                             client.Add(clients);
                             Console.WriteLine("Account created! Return and log in!\n");
                             Console.ReadKey();

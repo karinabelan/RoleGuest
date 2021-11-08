@@ -14,6 +14,8 @@ namespace DTO
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime RowInsertTime { get; set; }
+        public DateTime RowUpdateTime { get; set; }
 
 
         public void ChangePassword(string newPass)

@@ -30,7 +30,7 @@ namespace DAL.ADO
                         using (SqlCommand comm = conn.CreateCommand())
                         {
                             conn.Open();
-                            comm.CommandText = "SELECT [AddressID],[Country],[City]FROM [RoleGuest].[dbo].[AddressInfo] ";
+                            comm.CommandText = "SELECT [AddressID],[Country],[City],[RowInsertTime],[RowInsertTime] FROM [RoleGuest].[dbo].[AddressInfo] ";
 
                             SqlDataReader reader = comm.ExecuteReader();
                             while (reader.Read())
@@ -40,6 +40,8 @@ namespace DAL.ADO
                                     AddressID = (int)reader["AddressID"],
                                     Country = reader["Country"].ToString(),
                                     City = reader["City"].ToString()
+                                    //RowInsertTime = (DateTime)reader["RowInsertTime"],
+                                    //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
                                 });
                             }
                         }
@@ -66,10 +68,12 @@ namespace DAL.ADO
                 using (SqlCommand comm = connectionSql.CreateCommand())
                 {
                     connectionSql.Open();
-                    comm.CommandText = "INSERT INTO AddressInfo(Country, City) VALUES(@country, @city)";
+                    comm.CommandText = "INSERT INTO AddressInfo(Country, City, RowInsertTime,RowUpdateTime) VALUES(@country, @city, @insertTime, @updateTime)";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@country", u.Country);
                     comm.Parameters.AddWithValue("@city", u.City);
+                    comm.Parameters.AddWithValue("@insertTime", u.RowInsertTime);
+                    comm.Parameters.AddWithValue("@updateTime", u.RowUpdateTime);
                     comm.ExecuteNonQuery();
                     //bool T = true;
                 }

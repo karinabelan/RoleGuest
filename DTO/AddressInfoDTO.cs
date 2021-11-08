@@ -11,6 +11,9 @@ namespace DTO
         public int AddressID { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
+        public DateTime RowInsertTime { get; set; }
+        public DateTime RowUpdateTime { get; set; }
+
 
         public string InfoString()
         {

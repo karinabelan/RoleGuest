@@ -26,7 +26,7 @@ namespace DAL.ADO
                     using (SqlConnection conn = new SqlConnection(this.conn))
                     using (SqlCommand comm = conn.CreateCommand())
                     {
-                        comm.CommandText = "SELECT [PersonID],[InfoID],[Login],[Password],[FirstName],[LastName] FROM [RoleGuest].[dbo].[Client] ";
+                        comm.CommandText = "SELECT TOP (1000) [PersonID],[InfoID],[Login],[Password],[FirstName],[LastName],[RowInsertTime],[RowUpdateTime] FROM[RoleGuest].[dbo].[Client] ";
                         conn.Open();
                         SqlDataReader reader = comm.ExecuteReader();
                         //var users = new List<UserDTO>();
@@ -39,8 +39,10 @@ namespace DAL.ADO
                                 Login = reader["Login"].ToString(),
                                 Password = reader["Password"].ToString(),
                                 FirstName = reader["FirstName"].ToString(),
-                                LastName = reader["LastName"].ToString(),
-                            });
+                                LastName = reader["LastName"].ToString()
+                                //RowInsertTime =(DateTime) reader["RowInsertTime"],
+                                //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
+                        });
                         }
                     }
                 }
@@ -63,13 +65,16 @@ namespace DAL.ADO
                 using (SqlCommand comm = connectionSql.CreateCommand())
                 {
                     connectionSql.Open();
-                    comm.CommandText = "insert into Client(Login,Password,FirstName,LastName,InfoID) values (@login,@password,@FN,@LN,@infoI)";
+                    comm.CommandText = "insert into Client(Login,Password,FirstName,LastName,InfoID, RowInsertTime,RowUpdateTime) values (@login,@password,@FN,@LN,@infoID, @insertTime, @updateTime)";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@login", u.Login);
                     comm.Parameters.AddWithValue("@password", u.Password);
                     comm.Parameters.AddWithValue("@FN", u.FirstName);
                     comm.Parameters.AddWithValue("@LN", u.LastName);
-                    comm.Parameters.AddWithValue("@infoI", u.InfoID);
+                    comm.Parameters.AddWithValue("@infoID", u.InfoID);
+                    comm.Parameters.AddWithValue("@insertTime", u.RowInsertTime);
+                    comm.Parameters.AddWithValue("@updateTime", u.RowUpdateTime);
+
                     comm.ExecuteNonQuery();
                     //bool T = true;
                 }
@@ -91,11 +96,11 @@ namespace DAL.ADO
                 using (SqlCommand comm = connectionSql.CreateCommand())
                 {
                     connectionSql.Open();
-                    comm.CommandText = "update Client set Password=@newPassword where FirstName=@FN and LastName=@LN";
+                    comm.CommandText = "update Client set Password=@newPassword where FirstName=@FN and Login=@login";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@newPassword", newValue);
                     comm.Parameters.AddWithValue("@FN", clientTemp.FirstName);
-                    comm.Parameters.AddWithValue("@LN", clientTemp.LastName);
+                    comm.Parameters.AddWithValue("@login", clientTemp.Login);
                     int row = comm.ExecuteNonQuery();
                 }
             }
