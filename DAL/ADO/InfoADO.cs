@@ -18,14 +18,15 @@ namespace DAL.ADO
             info = new List<InfoDTO>();
             ReadDB();
         }
-        private void ReadDB()
+        public void ReadDB()
         {
             try
             {
+                info.Clear();
                 using (SqlConnection conn = new SqlConnection(this.conn))
                 using (SqlCommand comm = conn.CreateCommand())
                 {
-                    comm.CommandText = "SELECT  [InfoID],[CountOfVisit],[Discount],[AddressID],[RowInsertTime],[RowInsertTime] FROM [RoleGuest].[dbo].[Info] ";
+                    comm.CommandText = "SELECT  [InfoID],[CountOfVisit],[Discount],[AddressID],[RowInsertTime],[RowUpdateTime] FROM [RoleGuest].[dbo].[Info] ";
                     conn.Open();
                     SqlDataReader reader = comm.ExecuteReader();
 
@@ -36,9 +37,9 @@ namespace DAL.ADO
                             InfoID = (int)reader["InfoID"],
                             CountOfVisit = (int)reader["CountOfVisit"],
                             Discount = (int)reader["Discount"],
-                            AddressID = (int)reader["AddressID"]
-                            //RowInsertTime = (DateTime)reader["RowInsertTime"],
-                            //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
+                            AddressID = (int)reader["AddressID"],
+                            RowInsertTime = (DateTime)reader["RowInsertTime"],
+                            RowUpdateTime = (DateTime)reader["RowUpdateTime"]
                         });
                     }
 
@@ -75,9 +76,31 @@ namespace DAL.ADO
             }
         }
 
-        public void Change(int ID, string newValue, string newValue2, string newValue3)
+        public void Change(string newValue, string newValue2, string newValue3)//new-qurrent1time, new2-adressid
         {
-            throw new NotImplementedException();
+            int visitCur = 0;
+            foreach (InfoDTO temp in info)
+            {
+                if (Convert.ToString(temp.RowInsertTime) == newValue && newValue2== Convert.ToString(temp.AddressID))
+                {
+                    temp.ChangeNumOfVisit();
+                    visitCur = temp.CountOfVisit;
+                    //Idcur = temp.InfoID;
+                }
+            }
+            using (SqlConnection connectionSql = new SqlConnection(conn))
+            {
+                using (SqlCommand comm = connectionSql.CreateCommand())
+                {
+                    connectionSql.Open();
+                    comm.CommandText = "update Info set CountOfVisit=@visit where AddressID=@add";
+                    comm.Parameters.Clear();
+                    comm.Parameters.AddWithValue("@visit", visitCur);
+                    
+                    comm.Parameters.AddWithValue("@add", newValue2);
+                    int row = comm.ExecuteNonQuery();
+                }
+            }
         }
         public InfoDTO GetByID(int ID)
         {

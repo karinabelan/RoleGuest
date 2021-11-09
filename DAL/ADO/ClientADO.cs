@@ -18,11 +18,12 @@ namespace DAL.ADO
             client = new List<ClientDTO>();
             ReadDB();
         }
-        private void ReadDB()
+        public void ReadDB()
         {
             {
                 try
                 {
+                    client.Clear();
                     using (SqlConnection conn = new SqlConnection(this.conn))
                     using (SqlCommand comm = conn.CreateCommand())
                     {
@@ -81,12 +82,12 @@ namespace DAL.ADO
             }
         }
 
-        public void Change(int ID, string newValue, string newValue2, string newValue3)
+        public void Change( string newValue, string newValue2, string newValue3)
         {
-            var clientTemp = GetByID(ID);
+            //var clientTemp = GetByID(ID);
             foreach (ClientDTO temp in client)
             {
-                if (temp.Password == clientTemp.Password)
+                if (temp.Login == newValue2 && temp.FirstName==newValue3)
                 {
                     temp.ChangePassword(newValue);
                 }
@@ -99,8 +100,8 @@ namespace DAL.ADO
                     comm.CommandText = "update Client set Password=@newPassword where FirstName=@FN and Login=@login";
                     comm.Parameters.Clear();
                     comm.Parameters.AddWithValue("@newPassword", newValue);
-                    comm.Parameters.AddWithValue("@FN", clientTemp.FirstName);
-                    comm.Parameters.AddWithValue("@login", clientTemp.Login);
+                    comm.Parameters.AddWithValue("@FN", newValue3);
+                    comm.Parameters.AddWithValue("@login", newValue2);
                     int row = comm.ExecuteNonQuery();
                 }
             }

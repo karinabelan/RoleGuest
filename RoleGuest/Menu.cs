@@ -49,6 +49,13 @@ Select option:
                                 if (temp.Password == passUser && temp.Login == loginUser)
                                 {
                                     isLogin = true;
+                                    foreach(var inf in info.GetAll())
+                                    {
+                                        if (temp.InfoID == inf.InfoID)
+                                        {
+                                            info.Change(Convert.ToString(inf.RowInsertTime), Convert.ToString(inf.AddressID), "");
+                                        }
+                                    }
                                 }
 
                             }
@@ -92,8 +99,8 @@ Select option:
                                                     {
                                                         case "1":
                                                             {
-                                                                Console.Write("\nID:");
-                                                                int index1 = Convert.ToInt32(Console.ReadLine());
+                                                                //Console.Write("\nID:");
+                                                                //int index1 = Convert.ToInt32(Console.ReadLine());
                                                                 Console.Write("\nLogin:");
                                                                 string login1 = Console.ReadLine();
                                                                 Console.Write("\nFirstName:");
@@ -107,18 +114,20 @@ Select option:
                                                                     {
                                                                         isLogin1 = true;
                                                                     }
-
                                                                 }
                                                                 if (isLogin1)
                                                                 {
                                                                     Console.Write("\nInput new password:");
                                                                     string name1 = Console.ReadLine();
-                                                                    client.Change(index1, name1, login1, firstName1);
+                                                                    client.Change( name1, login1, firstName1);
                                                                     Console.WriteLine("sucessfully changed!\n");
                                                                     Console.ReadKey();
                                                                 }
                                                                 else
+                                                                {
                                                                     Console.WriteLine("Wrong login or first name\n");
+                                                                }
+                                                                    
                                                             }
                                                             isExit2 = true;
                                                             break;
@@ -164,48 +173,84 @@ Select option:
                             string LastNameStr = Console.ReadLine();
                             Console.Write("\nLogin:");
                             string LoginStr = Console.ReadLine();
-                            Console.Write("\nPassword:");
-                            string PasswordStr = Console.ReadLine();
-                            Console.Write("\nCountry:");
-                            string CountryStr = Console.ReadLine();
-                            Console.Write("\nCity:");
-                            string CityStr = Console.ReadLine();
-                            Console.Write("\nInfoID:");
-                            int InfoIDStr = Convert.ToInt32(Console.ReadLine());
-                            Console.Write("\nAddressID:");
-                            int AddressIDStr = Convert.ToInt32(Console.ReadLine());
-                            int countOfVisitStr = 1;
-                            int discountStr = 1;
+                            bool Existed = false;
+                            foreach(var cl in client.GetAll())
+                            {
+                                if (cl.Login == LoginStr)
+                                {
+                                    Existed = true;
+                                }
+                            }
+                            if (Existed == true)
+                            {
+                                Console.WriteLine("Error");
+                            }
+                            else
+                            {
+                                Console.Write("\nPassword:");
+                                string PasswordStr = Console.ReadLine();
+                                Console.Write("\nCountry:");
+                                string CountryStr = Console.ReadLine();
+                                Console.Write("\nCity:");
+                                string CityStr = Console.ReadLine();
+                                //Console.Write("\nInfoID:");
+                                //int InfoIDStr = Convert.ToInt32(Console.ReadLine());
+                                //Console.Write("\nAddressID:");
+                                //int AddressIDStr = Convert.ToInt32(Console.ReadLine());
+                                int countOfVisitStr = 1;
+                                int discountStr = 1;
 
-                            InfoDTO infoDTO = new InfoDTO();
-                            infoDTO.CountOfVisit = countOfVisitStr;
-                            infoDTO.Discount = discountStr;
-                            infoDTO.RowInsertTime = DateTime.Now;
-                            infoDTO.RowUpdateTime = DateTime.Now;
+                                AddressInfoDTO addressInfoDTO = new AddressInfoDTO();
+                                addressInfoDTO.Country = CountryStr;
+                                addressInfoDTO.City = CityStr;
+                                DateTime qurentTime = DateTime.Now;
+                                addressInfoDTO.RowInsertTime = qurentTime;
 
-                            AddressInfoDTO addressInfoDTO = new AddressInfoDTO();
-                            addressInfoDTO.Country = CountryStr;
-                            addressInfoDTO.City = CityStr;
-                            addressInfoDTO.RowInsertTime = DateTime.Now;
-                            addressInfoDTO.RowUpdateTime = DateTime.Now;
-                            addressInfo.Add(addressInfoDTO);
-                            infoDTO.InfoID =InfoIDStr;
-                            infoDTO.AddressID = addressInfoDTO.AddressID;
-                            info.Add(infoDTO);
+                                addressInfoDTO.RowUpdateTime = DateTime.Now;
+                                addressInfo.Add(addressInfoDTO);
+                                addressInfo.ReadDB();
+                                int qurentID = 0;
+                                foreach (var address in addressInfo.GetAll())
+                                {
+                                    if (Convert.ToString(qurentTime) == Convert.ToString(address.RowInsertTime))
+                                    {
+                                        qurentID = address.AddressID;
+                                    }
+                                }
 
+                                InfoDTO infoDTO = new InfoDTO();
+                                infoDTO.CountOfVisit = countOfVisitStr;
+                                infoDTO.Discount = discountStr;
+                                DateTime qurent1Time = DateTime.Now;
+                                infoDTO.RowInsertTime = qurent1Time;
+                                infoDTO.RowUpdateTime = DateTime.Now;
 
-                            ClientDTO clients = new ClientDTO();
-                            clients.FirstName = FirstNameStr;
-                            clients.LastName = LastNameStr;
-                            clients.Login = LoginStr;
-                            clients.Password = PasswordStr;
-                            clients.InfoID = infoDTO.InfoID;
+                                //infoDTO.InfoID =InfoIDStr;
+                                infoDTO.AddressID = qurentID;
+                                info.Add(infoDTO);
+                                info.ReadDB();
+                                int qurent1ID = 0;
+                                foreach (var inforn in info.GetAll())
+                                {
+                                    if (Convert.ToString(qurent1Time) == Convert.ToString(inforn.RowInsertTime))
+                                    {
+                                        qurent1ID = inforn.InfoID;
+                                    }
+                                }
 
-                            clients.RowInsertTime = DateTime.Now;
-                            clients.RowUpdateTime = DateTime.Now;
+                                ClientDTO clients = new ClientDTO();
+                                clients.FirstName = FirstNameStr;
+                                clients.LastName = LastNameStr;
+                                clients.Login = LoginStr;
+                                clients.Password = PasswordStr;
+                                clients.InfoID = qurent1ID;
 
-                            client.Add(clients);
-                            Console.WriteLine("Account created! Return and log in!\n");
+                                clients.RowInsertTime = DateTime.Now;
+                                clients.RowUpdateTime = DateTime.Now;
+
+                                client.Add(clients);
+                                Console.WriteLine("Account created! Return and log in!\n");
+                            }
                             Console.ReadKey();
                         }
                         break;

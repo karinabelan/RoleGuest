@@ -19,18 +19,20 @@ namespace DAL.ADO
             addressInfo = new List<AddressInfoDTO>();
             ReadDB();
         }
-        private void ReadDB()
+        public void ReadDB()
         {
             {
                 try
                 {
+                    addressInfo.Clear();
+
                     using (SqlConnection conn = new SqlConnection(connStr))
  
                     {
                         using (SqlCommand comm = conn.CreateCommand())
                         {
                             conn.Open();
-                            comm.CommandText = "SELECT [AddressID],[Country],[City],[RowInsertTime],[RowInsertTime] FROM [RoleGuest].[dbo].[AddressInfo] ";
+                            comm.CommandText = "SELECT [AddressID],[Country],[City],[RowInsertTime],[RowUpdateTime] FROM [RoleGuest].[dbo].[AddressInfo] ";
 
                             SqlDataReader reader = comm.ExecuteReader();
                             while (reader.Read())
@@ -80,7 +82,7 @@ namespace DAL.ADO
             }
         }
 
-        public void Change(int ID, string newValue, string newValue2, string newValue3)
+        public void Change( string newValue, string newValue2, string newValue3)
         {
             throw new NotImplementedException();
         }

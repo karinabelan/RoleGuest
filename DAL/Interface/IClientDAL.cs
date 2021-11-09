@@ -11,6 +11,7 @@ namespace DAL.Interface
         List<T> GetAll();
         T GetByID(int ID);
         void Add(T u);
-        void Change(int ID, string newValue, string newValue2, string newValue3);
+        void Change( string newValue, string newValue2, string newValue3);
+        void ReadDB();
     }
 }

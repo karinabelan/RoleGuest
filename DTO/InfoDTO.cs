@@ -15,6 +15,10 @@ namespace DTO
         public DateTime RowInsertTime { get; set; }
         public DateTime RowUpdateTime { get; set; }
 
+        public void ChangeNumOfVisit()
+        {
+            CountOfVisit += 1;
+        }
         //public InfoDTO(int CountOfVisit, int Discount, int AddressId, DateTime RowInsertTime, DateTime RowUpdateTime, int InfoId = 0)
         //{
         //    this.CountOfVisit = CountOfVisit;
