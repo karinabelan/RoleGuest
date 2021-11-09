@@ -99,14 +99,10 @@ Select option:
                                                     {
                                                         case "1":
                                                             {
-                                                                //Console.Write("\nID:");
-                                                                //int index1 = Convert.ToInt32(Console.ReadLine());
                                                                 Console.Write("\nLogin:");
                                                                 string login1 = Console.ReadLine();
                                                                 Console.Write("\nFirstName:");
                                                                 string firstName1 = Console.ReadLine();
-
-
                                                                 bool isLogin1 = false;
                                                                 foreach (ClientDTO temp in client.GetAll())
                                                                 {
@@ -126,8 +122,7 @@ Select option:
                                                                 else
                                                                 {
                                                                     Console.WriteLine("Wrong login or first name\n");
-                                                                }
-                                                                    
+                                                                }                                                                    
                                                             }
                                                             isExit2 = true;
                                                             break;
@@ -183,7 +178,7 @@ Select option:
                             }
                             if (Existed == true)
                             {
-                                Console.WriteLine("Error");
+                                Console.WriteLine("\nError. This login is already use! Try again");
                             }
                             else
                             {
@@ -256,22 +251,30 @@ Select option:
                         break;
                     case "3":
                         {
-                        //    /////////add  data verification
-                        //    Console.WriteLine("Change password: ");
-
-                        //    Console.Write("\nID:");
-                        //    int index = Convert.ToInt32(Console.ReadLine());
-                        //    Console.Write("\nLogin:");
-                        //    string login = Console.ReadLine();
-                        //    Console.Write("\nFirstName:");
-                        //    string firstName = Console.ReadLine();
-
-                        //    Console.Write("\nInput new password:");
-                        //    string name = Console.ReadLine();
-                        //    client.Change(index, name, firstName,);
-
-                        //    Console.WriteLine("sucessfully changed!\n");
-                        //    Console.ReadKey();
+                            Console.Write("\nLogin:");
+                            string login1 = Console.ReadLine();
+                            Console.Write("\nFirstName:");
+                            string firstName1 = Console.ReadLine();
+                            bool isLogin1 = false;
+                            foreach (ClientDTO temp in client.GetAll())
+                            {
+                                if (temp.Login == login1 && temp.FirstName == firstName1)
+                                {
+                                    isLogin1 = true;
+                                }
+                            }
+                            if (isLogin1)
+                            {
+                                Console.Write("\nInput new password:");
+                                string name1 = Console.ReadLine();
+                                client.Change(name1, login1, firstName1);
+                                Console.WriteLine("\nSucessfully changed! Return and log in!\n");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong login or first name. \n");
+                            }
                         }
                         break;
                     case "0":
