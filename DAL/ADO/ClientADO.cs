@@ -27,7 +27,7 @@ namespace DAL.ADO
                     using (SqlConnection conn = new SqlConnection(this.conn))
                     using (SqlCommand comm = conn.CreateCommand())
                     {
-                        comm.CommandText = "SELECT TOP (1000) [PersonID],[InfoID],[Login],[Password],[FirstName],[LastName],[RowInsertTime],[RowUpdateTime] FROM[RoleGuest].[dbo].[Client] ";
+                        comm.CommandText = "SELECT [PersonID],[InfoID],[Login],[Password],[FirstName],[LastName],[RowInsertTime],[RowUpdateTime] FROM[RoleGuest].[dbo].[Client] ";
                         conn.Open();
                         SqlDataReader reader = comm.ExecuteReader();
                         //var users = new List<UserDTO>();
@@ -40,9 +40,9 @@ namespace DAL.ADO
                                 Login = reader["Login"].ToString(),
                                 Password = reader["Password"].ToString(),
                                 FirstName = reader["FirstName"].ToString(),
-                                LastName = reader["LastName"].ToString()
-                                //RowInsertTime =(DateTime) reader["RowInsertTime"],
-                                //RowUpdateTime = (DateTime)reader["RowUpdateTime"]
+                                LastName = reader["LastName"].ToString(),
+                                RowInsertTime = (DateTime)reader["RowInsertTime"],
+                                RowUpdateTime = (DateTime)reader["RowUpdateTime"]
                             });
                         }
                     }

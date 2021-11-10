@@ -277,6 +277,7 @@ Select option:
                             }
                         }
                         break;
+
                     case "0":
                         isExit = true;
                         break;
