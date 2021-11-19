@@ -8,6 +8,8 @@ namespace DTO
 {
     public class ClientDTO
     {
+
+
         public int PersonID { get; set; }
         public int InfoID { get; set; }
         public string Login { get; set; }

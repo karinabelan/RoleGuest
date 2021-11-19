@@ -29,5 +29,7 @@ namespace WinFormRoleGuest
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
         }
+
+
     }
 }

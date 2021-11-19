@@ -44,7 +44,9 @@
     <Compile Include="ADO\AddressInfoADO.cs" />
     <Compile Include="ADO\ClientADO.cs" />
     <Compile Include="ADO\InfoADO.cs" />
+    <Compile Include="Interface\IAddressInfoDAL.cs" />
     <Compile Include="Interface\IClientDAL.cs" />
+    <Compile Include="Interface\IInfoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

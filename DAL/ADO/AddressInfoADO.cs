@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.ADO
 {
-    public class AddressInfoADO : IClientDAL<AddressInfoDTO>
+    public class AddressInfoADO : IAddressInfoDAL
     {
         List<AddressInfoDTO> addressInfo;
         private string connStr = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
@@ -61,9 +61,9 @@ namespace DAL.ADO
             return addressInfo;
         }
 
-        public void Add(AddressInfoDTO u)
+        public void Add(AddressInfoDTO address)
         {
-            addressInfo.Add(u);
+            addressInfo.Add(address);
 
             using (SqlConnection connectionSql = new SqlConnection(connStr))
             {
@@ -72,24 +72,27 @@ namespace DAL.ADO
                     connectionSql.Open();
                     comm.CommandText = "INSERT INTO AddressInfo(Country, City, RowInsertTime,RowUpdateTime) VALUES(@country, @city, @insertTime, @updateTime)";
                     comm.Parameters.Clear();
-                    comm.Parameters.AddWithValue("@country", u.Country);
-                    comm.Parameters.AddWithValue("@city", u.City);
-                    comm.Parameters.AddWithValue("@insertTime", u.RowInsertTime);
-                    comm.Parameters.AddWithValue("@updateTime", u.RowUpdateTime);
+                    comm.Parameters.AddWithValue("@country", address.Country);
+                    comm.Parameters.AddWithValue("@city", address.City);
+                    comm.Parameters.AddWithValue("@insertTime", address.RowInsertTime);
+                    comm.Parameters.AddWithValue("@updateTime", address.RowUpdateTime);
                     comm.ExecuteNonQuery();
                     //bool T = true;
                 }
             }
         }
 
-        public void Change( string newValue, string newValue2, string newValue3)
-        {
-            throw new NotImplementedException();
-        }
-
         public AddressInfoDTO GetByID(int ID)
         {
-            throw new NotImplementedException();
+            int index = 0;
+            for (int i = 0; i < addressInfo.Count; i++)
+            {
+                if (addressInfo[i].AddressID == ID)
+                {
+                    index = i;
+                }
+            }
+            return addressInfo[index];
         }
     }
 }

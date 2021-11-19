@@ -90,7 +90,7 @@ namespace WinFormRoleGuest
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(251, 25);
+            this.label1.Location = new System.Drawing.Point(261, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(269, 66);
             this.label1.TabIndex = 0;
@@ -102,6 +102,7 @@ namespace WinFormRoleGuest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 556);
             this.Controls.Add(this.MainPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.MainPanel.ResumeLayout(false);

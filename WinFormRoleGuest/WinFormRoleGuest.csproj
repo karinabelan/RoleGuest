@@ -46,30 +46,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="UserAccount\BL\AddressInfoAccount.cs" />
+    <Compile Include="UserAccount\BL\InfoAccount.cs" />
+    <Compile Include="UserAccount\BL\ClientAccount.cs" />
+    <Compile Include="UserAccount\Interface\IAddressInfoAccount.cs" />
+    <Compile Include="UserAccount\Interface\IClientAccount.cs" />
+    <Compile Include="WinFormMenu\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="WinFormMenu\ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccount\Interface\IInfoAccount.cs" />
+    <Compile Include="WinFormMenu\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinFormMenu\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="WinFormMenu\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="WinFormMenu\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterForm.cs">
+    <Compile Include="WinFormMenu\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegisterForm.Designer.cs">
+    <Compile Include="WinFormMenu\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="WinFormMenu\ChangePasswordForm.resx">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinFormMenu\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="WinFormMenu\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -82,7 +97,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RegisterForm.resx">
+    <EmbeddedResource Include="WinFormMenu\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -109,9 +124,17 @@
       <Project>{bed029e9-af01-45c5-b4af-3d4f9f2a3495}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL_Tests\DAL_Tests.csproj">
+      <Project>{af169633-6d2e-4a28-9206-e35955bed36f}</Project>
+      <Name>DAL_Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{eeca3061-e26e-4e3f-8410-962680a4fe4a}</Project>
       <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleGuest\RoleGuest.csproj">
+      <Project>{556ebaef-a94b-4ed4-80f2-76efd6676fa8}</Project>
+      <Name>RoleGuest</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

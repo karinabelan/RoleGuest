@@ -7,9 +7,9 @@ namespace RoleGuest
 {
     class Menu
     {
-        IClientDAL<ClientDTO> client;
-        IClientDAL<InfoDTO> info;
-        IClientDAL<AddressInfoDTO> addressInfo;
+        IClientDAL client=null;
+        IInfoDAL info= null;
+        IAddressInfoDAL addressInfo=null;
 
         public Menu()
         {
@@ -53,7 +53,7 @@ Select option:
                                     {
                                         if (temp.InfoID == inf.InfoID)
                                         {
-                                            info.Change(Convert.ToString(inf.RowInsertTime), Convert.ToString(inf.AddressID), "");
+                                            info.Change(Convert.ToString(inf.RowInsertTime), Convert.ToString(inf.AddressID));
                                         }
                                     }
                                 }

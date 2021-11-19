@@ -3,14 +3,16 @@ using DTO;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using WinFormRoleGuest.Interface;
 
 namespace WinFormRoleGuest
 {
     public partial class RegisterForm : Form
     {
-        IClientDAL<ClientDTO> client;
-        IClientDAL<InfoDTO> info;
-        IClientDAL<AddressInfoDTO> addressInfo;
+        IClientAccount clientAccount;
+        IInfoAccount infoAccount;
+        IAddressInfoAccount addressInfoAccount;
+
         public RegisterForm()
         {
             InitializeComponent();
@@ -190,6 +192,7 @@ namespace WinFormRoleGuest
             //{
             //    return;
             //}
+
             int countOfVisitStr = 1;
             int discountStr = 1;
 
@@ -200,10 +203,10 @@ namespace WinFormRoleGuest
             addressInfoDTO.RowInsertTime = qurentTime;
 
             addressInfoDTO.RowUpdateTime = DateTime.Now;
-            addressInfo.Add(addressInfoDTO);
-            addressInfo.ReadDB();
+            addressInfoAccount.Add(addressInfoDTO);
+            addressInfoAccount.ReadDB();
             int qurentID = 0;
-            foreach (var address in addressInfo.GetAll())
+            foreach (var address in addressInfoAccount.GetAll())
             {
                 if (Convert.ToString(qurentTime) == Convert.ToString(address.RowInsertTime))
                 {
@@ -220,10 +223,10 @@ namespace WinFormRoleGuest
 
             //infoDTO.InfoID =InfoIDStr;
             infoDTO.AddressID = qurentID;
-            info.Add(infoDTO);
-            info.ReadDB();
+            infoAccount.Add(infoDTO);
+            infoAccount.ReadDB();
             int qurent1ID = 0;
-            foreach (var inforn in info.GetAll())
+            foreach (var inforn in infoAccount.GetAll())
             {
                 if (Convert.ToString(qurent1Time) == Convert.ToString(inforn.RowInsertTime))
                 {
@@ -240,7 +243,7 @@ namespace WinFormRoleGuest
             clients.RowInsertTime = DateTime.Now;
             clients.RowUpdateTime = DateTime.Now;
 
-            client.Add(clients);
+            clientAccount.Add(clients);
 
             MessageBox.Show("Account created");
             this.Hide();
@@ -248,18 +251,18 @@ namespace WinFormRoleGuest
             loginForm.Show();
 
         }
-        //public Boolean IsLoginExists()
-        //{
-        //    bool isLogin = false;
-        //    foreach (ClientDTO temp in client.GetAll())
-        //    {
-        //        if (temp.Login == EmailField.Text)
-        //        {
-        //            isLogin = true;
-        //            MessageBox.Show("Account already exists");
-        //        }
 
-        //    }
-        //}
+        public bool IsLoginExists(ClientDTO client)
+        {
+            bool res = false;
+            foreach (var curr in clientAccount.GetAll())
+            {
+                if (curr.Login == client.Login)
+                {
+                    res = true;
+                }
+            }
+            return res;
+        }
     }
 }

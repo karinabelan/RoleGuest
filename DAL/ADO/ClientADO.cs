@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace DAL.ADO
 {
-    public class ClientADO : IClientDAL<ClientDTO>
-    {
+    public class ClientADO : IClientDAL
+    { 
         List<ClientDTO> client;
         private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
         public ClientADO()
@@ -57,9 +57,9 @@ namespace DAL.ADO
         {
             return client;
         }
-        public void Add(ClientDTO u)
+        public void Add(ClientDTO user)
         {
-            client.Add(u);
+            client.Add(user);
 
             using (SqlConnection connectionSql = new SqlConnection(conn))
             {
@@ -68,13 +68,13 @@ namespace DAL.ADO
                     connectionSql.Open();
                     comm.CommandText = "insert into Client(Login,Password,FirstName,LastName,InfoID, RowInsertTime,RowUpdateTime) values (@login,@password,@FN,@LN,@infoID, @insertTime, @updateTime)";
                     comm.Parameters.Clear();
-                    comm.Parameters.AddWithValue("@login", u.Login);
-                    comm.Parameters.AddWithValue("@password", u.Password);
-                    comm.Parameters.AddWithValue("@FN", u.FirstName);
-                    comm.Parameters.AddWithValue("@LN", u.LastName);
-                    comm.Parameters.AddWithValue("@infoID", u.InfoID);
-                    comm.Parameters.AddWithValue("@insertTime", u.RowInsertTime);
-                    comm.Parameters.AddWithValue("@updateTime", u.RowUpdateTime);
+                    comm.Parameters.AddWithValue("@login", user.Login);
+                    comm.Parameters.AddWithValue("@password", user.Password);
+                    comm.Parameters.AddWithValue("@FN", user.FirstName);
+                    comm.Parameters.AddWithValue("@LN", user.LastName);
+                    comm.Parameters.AddWithValue("@infoID", user.InfoID);
+                    comm.Parameters.AddWithValue("@insertTime", user.RowInsertTime);
+                    comm.Parameters.AddWithValue("@updateTime", user.RowUpdateTime);
 
                     comm.ExecuteNonQuery();
                     //bool T = true;
@@ -82,14 +82,14 @@ namespace DAL.ADO
             }
         }
 
-        public void Change( string newValue, string newValue2, string newValue3)
+        public void Change( string newpass, string log, string fn)
         {
             //var clientTemp = GetByID(ID);
             foreach (ClientDTO temp in client)
             {
-                if (temp.Login == newValue2 && temp.FirstName==newValue3)
+                if (temp.Login == log && temp.FirstName== fn)
                 {
-                    temp.ChangePassword(newValue);
+                    temp.ChangePassword(newpass);
                 }
             }
             using (SqlConnection connectionSql = new SqlConnection(conn))
@@ -99,9 +99,9 @@ namespace DAL.ADO
                     connectionSql.Open();
                     comm.CommandText = "update Client set Password=@newPassword where FirstName=@FN and Login=@login";
                     comm.Parameters.Clear();
-                    comm.Parameters.AddWithValue("@newPassword", newValue);
-                    comm.Parameters.AddWithValue("@FN", newValue3);
-                    comm.Parameters.AddWithValue("@login", newValue2);
+                    comm.Parameters.AddWithValue("@newPassword", newpass);
+                    comm.Parameters.AddWithValue("@FN", fn);
+                    comm.Parameters.AddWithValue("@login", log);
                     int row = comm.ExecuteNonQuery();
                 }
             }

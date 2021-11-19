@@ -14,18 +14,18 @@ namespace DAL_Tests
 
     public class ClientDalTests
     {
-        IClientDAL<ClientDTO> client;
-        [Test]
-        public void Test_GetByID()
-        {
-            ClientDTO temp = new ClientDTO();
-            string firstName = "Mas";
-            temp.FirstName = firstName;
-            temp.PersonID = 3;//current
+        //IClientDAL<ClientDTO> client;
+        //[Test]
+        //public void Test_GetByID()
+        //{
+        //    ClientDTO temp = new ClientDTO();
+        //    string firstName = "Mas";
+        //    temp.FirstName = firstName;
+        //    temp.PersonID = 3;//current
 
-            ClientDTO exepObj = client.GetByID(temp.PersonID);
-            Assert.AreEqual(exepObj.PersonID, temp.PersonID);
-        }
+        //    ClientDTO exepObj = client.GetByID(temp.PersonID);
+        //    Assert.AreEqual(exepObj.PersonID, temp.PersonID);
+        //}
     }
-    }
+    
 }

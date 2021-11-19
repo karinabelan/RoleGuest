@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.ADO
 {
-    public class InfoADO : IClientDAL<InfoDTO>
+    public class InfoADO : IInfoDAL
     {
         List<InfoDTO> info;
         private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
@@ -54,9 +54,9 @@ namespace DAL.ADO
         {
             return info;
         }
-        public void Add(InfoDTO u)
+        public void Add(InfoDTO information)
         {
-            info.Add(u);
+            info.Add(information);
 
             using (SqlConnection connectionSql = new SqlConnection(conn))
             {
@@ -65,18 +65,18 @@ namespace DAL.ADO
                     connectionSql.Open();
                     comm.CommandText = "INSERT INTO Info(CountOfVisit,Discount,AddressID, RowInsertTime,RowUpdateTime) VALUES(@COV,@discount,@adrID, @insertTime, @updateTime)";
                     comm.Parameters.Clear();
-                    comm.Parameters.AddWithValue("@COV", u.CountOfVisit);
-                    comm.Parameters.AddWithValue("@discount", u.Discount);
-                    comm.Parameters.AddWithValue("@adrID", u.AddressID);
-                    comm.Parameters.AddWithValue("@insertTime", u.RowInsertTime);
-                    comm.Parameters.AddWithValue("@updateTime", u.RowUpdateTime);
+                    comm.Parameters.AddWithValue("@COV", information.CountOfVisit);
+                    comm.Parameters.AddWithValue("@discount", information.Discount);
+                    comm.Parameters.AddWithValue("@adrID", information.AddressID);
+                    comm.Parameters.AddWithValue("@insertTime", information.RowInsertTime);
+                    comm.Parameters.AddWithValue("@updateTime", information.RowUpdateTime);
                     comm.ExecuteNonQuery();
                     //bool T = true;
                 }
             }
         }
 
-        public void Change(string newValue, string newValue2, string newValue3)//new-qurrent1time, new2-adressid
+        public void Change(string newValue, string newValue2)//new-qurrent1time, new2-adressid
         {
             int visitCur = 0;
             foreach (InfoDTO temp in info)
