@@ -11,18 +11,18 @@ namespace DAL.ADO
 {
     public class InfoADO : IInfoDAL
     {
-        List<InfoDTO> info;
+        List<InfoDTO> infos;
         private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
         public InfoADO()
         {
-            info = new List<InfoDTO>();
+            infos = new List<InfoDTO>();
             ReadDB();
         }
         public void ReadDB()
         {
             try
             {
-                info.Clear();
+                infos.Clear();
                 using (SqlConnection conn = new SqlConnection(this.conn))
                 using (SqlCommand comm = conn.CreateCommand())
                 {
@@ -32,7 +32,7 @@ namespace DAL.ADO
 
                     while (reader.Read())
                     {
-                        info.Add(new InfoDTO
+                        infos.Add(new InfoDTO
                         {
                             InfoID = (int)reader["InfoID"],
                             CountOfVisit = (int)reader["CountOfVisit"],
@@ -52,11 +52,11 @@ namespace DAL.ADO
         }
         public List<InfoDTO> GetAll()
         {
-            return info;
+            return infos;
         }
         public void Add(InfoDTO information)
         {
-            info.Add(information);
+            infos.Add(information);
 
             using (SqlConnection connectionSql = new SqlConnection(conn))
             {
@@ -79,7 +79,7 @@ namespace DAL.ADO
         public void Change(string newValue, string newValue2)//new-qurrent1time, new2-adressid
         {
             int visitCur = 0;
-            foreach (InfoDTO temp in info)
+            foreach (InfoDTO temp in infos)
             {
                 if (Convert.ToString(temp.RowInsertTime) == newValue && newValue2== Convert.ToString(temp.AddressID))
                 {
@@ -105,14 +105,14 @@ namespace DAL.ADO
         public InfoDTO GetByID(int ID)
         {
             int index = 0;
-            for (int i = 0; i < info.Count; i++)
+            for (int i = 0; i < infos.Count; i++)
             {
-                if (info[i].InfoID == ID)
+                if (infos[i].InfoID == ID)
                 {
                     index = i;
                 }
             }
-            return info[index];
+            return infos[index];
         }
     }
 }

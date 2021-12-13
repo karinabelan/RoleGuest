@@ -12,11 +12,11 @@ namespace DAL.ADO
 {
     public class AddressInfoADO : IAddressInfoDAL
     {
-        List<AddressInfoDTO> addressInfo;
+        List<AddressInfoDTO> addressInfos;
         private string connStr = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
         public AddressInfoADO()
         {
-            addressInfo = new List<AddressInfoDTO>();
+            addressInfos = new List<AddressInfoDTO>();
             ReadDB();
         }
         public void ReadDB()
@@ -24,7 +24,7 @@ namespace DAL.ADO
             {
                 try
                 {
-                    addressInfo.Clear();
+                    addressInfos.Clear();
 
                     using (SqlConnection conn = new SqlConnection(connStr))
  
@@ -37,7 +37,7 @@ namespace DAL.ADO
                             SqlDataReader reader = comm.ExecuteReader();
                             while (reader.Read())
                             {
-                                addressInfo.Add(new AddressInfoDTO
+                                addressInfos.Add(new AddressInfoDTO
                                 {
                                     AddressID = (int)reader["AddressID"],
                                     Country = reader["Country"].ToString(),
@@ -58,12 +58,12 @@ namespace DAL.ADO
         }
         public List<AddressInfoDTO> GetAll()
         {
-            return addressInfo;
+            return addressInfos;
         }
 
         public void Add(AddressInfoDTO address)
         {
-            addressInfo.Add(address);
+            addressInfos.Add(address);
 
             using (SqlConnection connectionSql = new SqlConnection(connStr))
             {
@@ -85,14 +85,14 @@ namespace DAL.ADO
         public AddressInfoDTO GetByID(int ID)
         {
             int index = 0;
-            for (int i = 0; i < addressInfo.Count; i++)
+            for (int i = 0; i < addressInfos.Count; i++)
             {
-                if (addressInfo[i].AddressID == ID)
+                if (addressInfos[i].AddressID == ID)
                 {
                     index = i;
                 }
             }
-            return addressInfo[index];
+            return addressInfos[index];
         }
     }
 }

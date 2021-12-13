@@ -3,38 +3,38 @@ using DTO;
 using System.Collections.Generic;
 using WinFormRoleGuest.Interface;
 
-namespace WinFormRoleGuest.BL
+namespace WinFormRoleGuest.BLL
 {
     public class ClientAccount : IClientAccount
     {
-        readonly private IClientDAL client_1;
-        public ClientAccount(IClientDAL client)
+        readonly private IClientDAL _clients;
+        public ClientAccount(IClientDAL clients)
         {
-            client_1 = client;
+            _clients = clients;
         }
         public void Add(ClientDTO user)
         {
-            client_1.Add(user);
+            _clients.Add(user);
         }
 
         public void Change(string newpass, string log, string fn)
         {
-           client_1.Change(newpass,log,fn);
+           _clients.Change(newpass,log,fn);
         }
 
         public List<ClientDTO> GetAll()
         {
-            return client_1.GetAll();
+            return _clients.GetAll();
         }
 
         public ClientDTO GetByID(int ID)
         {
-           return client_1.GetByID(ID);
+           return _clients.GetByID(ID);
         }
 
         public void ReadDB()
         {
-            client_1.ReadDB();
+            _clients.ReadDB();
         }
     }
 }

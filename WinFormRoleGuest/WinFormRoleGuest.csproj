@@ -46,18 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserAccount\BL\AddressInfoAccount.cs" />
-    <Compile Include="UserAccount\BL\InfoAccount.cs" />
-    <Compile Include="UserAccount\BL\ClientAccount.cs" />
-    <Compile Include="UserAccount\Interface\IAddressInfoAccount.cs" />
-    <Compile Include="UserAccount\Interface\IClientAccount.cs" />
     <Compile Include="WinFormMenu\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinFormMenu\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserAccount\Interface\IInfoAccount.cs" />
     <Compile Include="WinFormMenu\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +114,10 @@
     <None Include="Images\lock.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{68202947-7b8c-46fa-a0bf-9778c9cab362}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{bed029e9-af01-45c5-b4af-3d4f9f2a3495}</Project>
       <Name>DAL</Name>

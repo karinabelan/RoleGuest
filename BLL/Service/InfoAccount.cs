@@ -7,37 +7,37 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFormRoleGuest.Interface;
 
-namespace WinFormRoleGuest.BL
+namespace WinFormRoleGuest.BLL
 {
     public class InfoAccount : IInfoAccount
     {
-        readonly private IInfoDAL info_1;
-        public InfoAccount(IInfoDAL info)
+        readonly private IInfoDAL _infos;
+        public InfoAccount(IInfoDAL infos)
         {
-            info_1 = info;
+            _infos = infos;
         }
         public void Add(InfoDTO information)
         {
-            info_1.Add(information);
+            _infos.Add(information);
         }
 
         public void Change(string newValue, string newValue2)
         {
-            info_1.Change(newValue, newValue2);
+            _infos.Change(newValue, newValue2);
         }
 
         public List<InfoDTO> GetAll()
         {
-            return info_1.GetAll();
+            return _infos.GetAll();
         }
 
         public InfoDTO GetByID(int ID)
         {
-            return info_1.GetByID(ID);
+            return _infos.GetByID(ID);
         }
         public void ReadDB()
         {
-            info_1.ReadDB();
+            _infos.ReadDB();
         }
     }
 }

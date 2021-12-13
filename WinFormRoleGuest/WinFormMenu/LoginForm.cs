@@ -7,8 +7,15 @@ namespace WinFormRoleGuest
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        IAddressInfoAccount _addressInfoAccount;
+        IInfoAccount _infoAccount;
+        IClientAccount _clientAccount;
+        public LoginForm(IClientAccount clientAccount, IInfoAccount infoAccount, IAddressInfoAccount addressInfoAccount)
         {
+
+            _addressInfoAccount = addressInfoAccount;
+            _infoAccount = infoAccount;
+            _clientAccount = clientAccount;
             InitializeComponent();
         }
         private void close_Click(object sender, EventArgs e)
@@ -53,10 +60,16 @@ namespace WinFormRoleGuest
             }
             String loginUser = EmailField.Text;
             String passUser = PasswordField.Text;
-            var temp = clientAccount.GetAll();
+            var temp = _clientAccount.GetAll();
+            if (temp==null)
+            {
+                MessageBox.Show("Try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
             bool isLogin = false;
 
-            
+
             //if (loginUser == temp.Login)
             //{
             //    for (int i = 0; i < passUser.Length;)
@@ -66,31 +79,6 @@ namespace WinFormRoleGuest
             //            isLogin = false;
             //        }
             //    }
-            //}
-            //if (tempObj.Password == passUser && tempObj.Login == loginUser)
-            //{
-            //    for (int i = 0; i < passUser.Length; i++)
-            //    {
-            //        if (passUser[i] != tempObj.Password[i])
-            //        {
-            //            hasAccount = false;
-            //        }
-            //    }
-            //}
-            //foreach (ClientDTO temp in client.GetAll())
-            //{
-            //    if (temp.Password == passUser && temp.Login == loginUser)
-            //    {
-            //        isLogin = true;
-            //        foreach (var inf in info.GetAll())
-            //        {
-            //            if (temp.InfoID == inf.InfoID)
-            //            {
-            //                info.Change(Convert.ToString(inf.RowInsertTime), Convert.ToString(inf.AddressID), "");
-            //            }
-            //        }
-            //    }
-
             //}
             if (isLogin)
             {

@@ -11,11 +11,11 @@ namespace DAL.ADO
 {
     public class ClientADO : IClientDAL
     { 
-        List<ClientDTO> client;
+        List<ClientDTO> clients;
         private string conn = "Data Source=DESKTOP-2E4L5Q6;Initial Catalog=RoleGuest;Integrated Security=True";
         public ClientADO()
         {
-            client = new List<ClientDTO>();
+            clients = new List<ClientDTO>();
             ReadDB();
         }
         public void ReadDB()
@@ -23,7 +23,7 @@ namespace DAL.ADO
             {
                 try
                 {
-                    client.Clear();
+                    clients.Clear();
                     using (SqlConnection conn = new SqlConnection(this.conn))
                     using (SqlCommand comm = conn.CreateCommand())
                     {
@@ -33,7 +33,7 @@ namespace DAL.ADO
                         //var users = new List<UserDTO>();
                         while (reader.Read())
                         {
-                            client.Add(new ClientDTO
+                            clients.Add(new ClientDTO
                             {
                                 PersonID = (int)reader["PersonID"],
                                 InfoID = (int)reader["InfoID"],
@@ -55,11 +55,11 @@ namespace DAL.ADO
         }
         public List<ClientDTO> GetAll()
         {
-            return client;
+            return clients;
         }
         public void Add(ClientDTO user)
         {
-            client.Add(user);
+            clients.Add(user);
 
             using (SqlConnection connectionSql = new SqlConnection(conn))
             {
@@ -85,7 +85,7 @@ namespace DAL.ADO
         public void Change( string newpass, string log, string fn)
         {
             //var clientTemp = GetByID(ID);
-            foreach (ClientDTO temp in client)
+            foreach (ClientDTO temp in clients)
             {
                 if (temp.Login == log && temp.FirstName== fn)
                 {
@@ -110,14 +110,14 @@ namespace DAL.ADO
         public ClientDTO GetByID(int ID)
         {
             int index = 0;
-            for (int i = 0; i < client.Count; i++)
+            for (int i = 0; i < clients.Count; i++)
             {
-                if (client[i].PersonID == ID)
+                if (clients[i].PersonID == ID)
                 {
                     index = i;
                 }
             }
-            return client[index];
+            return clients[index];
         }
     }
 }

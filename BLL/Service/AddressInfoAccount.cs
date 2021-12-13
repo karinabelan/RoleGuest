@@ -3,34 +3,34 @@ using DTO;
 using System.Collections.Generic;
 using WinFormRoleGuest.Interface;
 
-namespace WinFormRoleGuest.BL
+namespace WinFormRoleGuest.BLL
 
 {
     public class AddressInfoAccount : IAddressInfoAccount
     {
-        readonly private IAddressInfoDAL addressInfo_1;
-        public AddressInfoAccount(IAddressInfoDAL addressInfo)
+        readonly private IAddressInfoDAL _addressInfos;
+        public AddressInfoAccount(IAddressInfoDAL addressInfos)
         {
-            addressInfo_1 = addressInfo;
+            _addressInfos = addressInfos;
         }
         public void Add(AddressInfoDTO address)
         {
-            addressInfo_1.Add(address);
+            _addressInfos.Add(address);
         }
 
         public List<AddressInfoDTO> GetAll()
         {
-            return addressInfo_1.GetAll();
+            return _addressInfos.GetAll();
         }
 
         public AddressInfoDTO GetByID(int ID)
         {
-            return addressInfo_1.GetByID(ID);
+            return _addressInfos.GetByID(ID);
         }
 
         public void ReadDB()
         {
-            addressInfo_1.ReadDB();
+            _addressInfos.ReadDB();
         }
     }
 }
