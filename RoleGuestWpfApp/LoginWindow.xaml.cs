@@ -43,48 +43,55 @@ namespace RoleGuestWpfApp
         {
             String loginUser = textBoxLogin.Text.Trim();
             String passUser = textBoxPassword.Password.Trim();
-            if (textBoxLogin.Text == "")
-            {
-                MessageBox.Show("input login", "Error");
-                return;
-            }
-            if (textBoxPassword.Password == "")
-            {
-                MessageBox.Show("input password", "Error");
-                return;
-            }
-            var tempObj = _clientAccount.GetObj(loginUser);
-            if (tempObj == null)
-            {
-                MessageBox.Show("Coudnt find your account", "Error");
-                return;
-            }
-            bool isExist = true;
 
-            if (loginUser == tempObj.Login)
+            if (loginUser.Length <= 0)
             {
-                for (int i = 0; i < passUser.Length; i++)
-                {
-                    if (passUser[i] != tempObj.Password[i])
-                    {
-                        isExist = false;
-                    }
-                }
+                textBoxLogin.ToolTip = "Input login!";
+                textBoxLogin.Background = Brushes.DarkRed;
             }
-            if (isExist == true)
+            else if (passUser.Length <= 0)
             {
-
-                this.Hide();
-                MainWindow mainWindows = new MainWindow();
-                mainWindows.Show();
+                textBoxPassword.ToolTip = "Input password!";
+                textBoxPassword.Background = Brushes.DarkRed;
             }
             else
             {
-                MessageBox.Show("Incorrect password or login", "Error");
+                textBoxLogin.ToolTip = "";
+                textBoxLogin.Background = Brushes.Transparent;
+                textBoxPassword.ToolTip = "";
+                textBoxPassword.Background = Brushes.Transparent;
+                var tempObj = _clientAccount.GetObj(loginUser);
+                if (tempObj == null)
+                {
+                    MessageBox.Show("Incorrect login or password", "Error");
+                    return;
+                }
+                bool isExist = true;
+
+                if (loginUser == tempObj.Login)
+                {
+                    for (int i = 0; i < passUser.Length; i++)
+                    {
+                        if (passUser[i] != tempObj.Password[i])
+                        {
+                            isExist = false;
+                        }
+                    }
+                }
+                if (isExist == true)
+                {
+
+                    this.Hide();
+                    MainWindow mainWindows = new MainWindow();
+                    mainWindows.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect password or login", "Error");
+                }
+
             }
-
         }
-
         private void Button_Registration_Click(object sender, RoutedEventArgs e)
         {
             Hide();

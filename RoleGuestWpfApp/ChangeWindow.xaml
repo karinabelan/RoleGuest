@@ -13,13 +13,14 @@
                 <DropShadowEffect BlurRadius="60" Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
             <StackPanel>
-                <TextBlock Text="Restoration" FontSize="40" FontWeight="Bold" Margin="0 0 0 20" />
+                <TextBlock Text="Change password" FontSize="40" FontWeight="Bold" Margin="0 0 0 20" />
 
                 <Grid Margin="0 0 0 20">
                     <Button HorizontalAlignment="Left" Content="Registration" Click="Button_Registration_Click"/>
                     <Button HorizontalAlignment="Right" Content="Log in" Click="Button_LogIn_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
 
                 </Grid>
+  
                 <TextBox x:Name="textBoxLogin"  materialDesign:HintAssist.Hint="Input login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxFirstName" materialDesign:HintAssist.Hint="Input first name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <PasswordBox x:Name="textBoxNewPassword" materialDesign:HintAssist.Hint="Input new password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
