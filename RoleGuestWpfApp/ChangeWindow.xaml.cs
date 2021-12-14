@@ -53,26 +53,54 @@ namespace RoleGuestWpfApp
 
             string login = textBoxLogin.Text.Trim();
             string firstName = textBoxFirstName.Text.Trim();
-            bool isLogin1 = false;
-            foreach (ClientDTO temp in _clientAccount.GetAll())
+            if (login.Length <= 0)
             {
-                if (temp.Login == login && temp.FirstName == firstName)
-                {
-                    isLogin1 = true;
-                }
+                textBoxLogin.ToolTip = "Input login!";
+                textBoxLogin.Background = Brushes.DarkRed;
             }
-            if (isLogin1)
+            else if (firstName.Length <= 0)
             {
-                string newPass = textBoxNewPassword.Password.Trim();
-                _clientAccount.Change(newPass, login, firstName);
-                MessageBox.Show("Sucessfully changed!", "Information");
-                Hide();
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.Show();
+                textBoxFirstName.ToolTip = "Input first name!";
+                textBoxFirstName.Background = Brushes.DarkRed;
             }
             else
             {
-                MessageBox.Show("Wrong login or first name", "Error");
+                textBoxLogin.ToolTip = "";
+                textBoxLogin.Background = Brushes.Transparent;
+                textBoxFirstName.ToolTip = "";
+                textBoxFirstName.Background = Brushes.Transparent;
+                bool isLogin1 = false;
+                foreach (ClientDTO temp in _clientAccount.GetAll())
+                {
+                    if (temp.Login == login && temp.FirstName == firstName)
+                    {
+                        isLogin1 = true;
+                    }
+                }
+                if (isLogin1)
+                {
+                    string newPass = textBoxNewPassword.Password.Trim();
+                    if (newPass.Length <= 0)
+                    {
+                        textBoxNewPassword.ToolTip = "Input new password!";
+                        textBoxNewPassword.Background = Brushes.DarkRed;
+                    }
+                    else
+                    {
+                        textBoxNewPassword.ToolTip = "";
+                        textBoxNewPassword.Background = Brushes.Transparent;
+                        _clientAccount.Change(newPass, login, firstName);
+                        MessageBox.Show("Sucessfully changed!", "Information");
+                        Hide();
+                        LoginWindow loginWindow = new LoginWindow();
+                        loginWindow.Show();
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Wrong login or first name", "Error");
+                }
             }
         }
     }

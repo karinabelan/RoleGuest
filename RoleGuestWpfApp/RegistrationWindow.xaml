@@ -18,12 +18,12 @@
                 <Grid Margin="0 0 0 20">
                     <Button HorizontalAlignment="Right" Content="Log in" Click="Button_LogIn_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
                 </Grid>
-                <TextBox x:Name="textBoxLogin"  materialDesign:HintAssist.Hint="Input login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <PasswordBox x:Name="textBoxPassword" materialDesign:HintAssist.Hint="Input password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
                 <TextBox x:Name="textBoxFirstName" materialDesign:HintAssist.Hint="Input First name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxLastName" materialDesign:HintAssist.Hint="Input Last name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxCountry" materialDesign:HintAssist.Hint="Input Country" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxCity" materialDesign:HintAssist.Hint="Input City" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="textBoxLogin"  materialDesign:HintAssist.Hint="Input login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox x:Name="textBoxPassword" materialDesign:HintAssist.Hint="Input password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
                 <Button Content="Sing up" Margin="0 20" Click="Button_SingUp_Click"/>
             </StackPanel>
         </Border>

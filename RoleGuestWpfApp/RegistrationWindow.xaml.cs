@@ -47,62 +47,116 @@ namespace RoleGuestWpfApp
 
         private void Button_SingUp_Click(object sender, RoutedEventArgs e)
         {
-            int countOfVisitStr = 1;
-            int discountStr = 1;
+            String firstName = textBoxFirstName.Text.Trim();
+            String lastName = textBoxLastName.Text.Trim();
+            String country = textBoxCountry.Text.Trim();
+            String city = textBoxCity.Text.Trim();
+            String loginUser = textBoxLogin.Text.Trim();
+            String passUser = textBoxPassword.Password.Trim();
 
-            AddressInfoDTO addressInfoDTO = new AddressInfoDTO();
-            addressInfoDTO.Country = textBoxCountry.Text;
-            addressInfoDTO.City = textBoxCity.Text;
-            DateTime qurentTime = DateTime.Now;
-            addressInfoDTO.RowInsertTime = qurentTime;
-
-            addressInfoDTO.RowUpdateTime = DateTime.Now;
-            _addressInfoAccount.Add(addressInfoDTO);
-            _addressInfoAccount.ReadDB();
-            int qurentID = 0;
-            foreach (var address in _addressInfoAccount.GetAll())
+            if (firstName.Length <= 0)
             {
-                if (Convert.ToString(qurentTime) == Convert.ToString(address.RowInsertTime))
-                {
-                    qurentID = address.AddressID;
-                }
+                textBoxFirstName.ToolTip = "Input first name!";
+                textBoxFirstName.Background = Brushes.DarkRed;
             }
-
-            InfoDTO infoDTO = new InfoDTO();
-            infoDTO.CountOfVisit = countOfVisitStr;
-            infoDTO.Discount = discountStr;
-            DateTime qurent1Time = DateTime.Now;
-            infoDTO.RowInsertTime = qurent1Time;
-            infoDTO.RowUpdateTime = DateTime.Now;
-
-            //infoDTO.InfoID =InfoIDStr;
-            infoDTO.AddressID = qurentID;
-            _infoAccount.Add(infoDTO);
-            _infoAccount.ReadDB();
-            int qurent1ID = 0;
-            foreach (var inforn in _infoAccount.GetAll())
+            else if (lastName.Length <= 0)
             {
-                if (Convert.ToString(qurent1Time) == Convert.ToString(inforn.RowInsertTime))
-                {
-                    qurent1ID = inforn.InfoID;
-                }
+                textBoxLastName.ToolTip = "Input last name!";
+                textBoxLastName.Background = Brushes.DarkRed;
             }
-            ClientDTO clients = new ClientDTO();
-            clients.FirstName = textBoxFirstName.Text;
-            clients.LastName = textBoxLastName.Text;
-            clients.Login = textBoxLogin.Text;
-            clients.Password = textBoxPassword.Password;
-            clients.InfoID = qurent1ID;
+            else if (country.Length <= 0)
+            {
+                textBoxCountry.ToolTip = "Input country!";
+                textBoxCountry.Background = Brushes.DarkRed;
+            }
+            else if (city.Length <= 0)
+            {
+                textBoxCity.ToolTip = "Input city!";
+                textBoxCity.Background = Brushes.DarkRed;
+            }
+            else if (loginUser.Length <= 0)
+            {
+                textBoxLogin.ToolTip = "Input login!";
+                textBoxLogin.Background = Brushes.DarkRed;
+            }
+            else if (passUser.Length <= 0)
+            {
+                textBoxPassword.ToolTip = "Input password!";
+                textBoxPassword.Background = Brushes.DarkRed;
+            }
+            else
+            {
 
-            clients.RowInsertTime = DateTime.Now;
-            clients.RowUpdateTime = DateTime.Now;
+                textBoxFirstName.ToolTip = "";
+                textBoxFirstName.Background = Brushes.Transparent;
+                textBoxLastName.ToolTip = "";
+                textBoxLastName.Background = Brushes.Transparent;
+                textBoxCountry.ToolTip = "";
+                textBoxCountry.Background = Brushes.Transparent;
+                textBoxCity.ToolTip = "";
+                textBoxCity.Background = Brushes.Transparent;
+                textBoxLogin.ToolTip = "";
+                textBoxLogin.Background = Brushes.Transparent;
+                textBoxPassword.ToolTip = "";
+                textBoxPassword.Background = Brushes.Transparent;
 
-            _clientAccount.Add(clients);
+                int countOfVisitStr = 1;
+                int discountStr = 1;
 
-            MessageBox.Show("Account created", "Information");
-            this.Hide();
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
+                AddressInfoDTO addressInfoDTO = new AddressInfoDTO();
+                addressInfoDTO.Country = textBoxCountry.Text;
+                addressInfoDTO.City = textBoxCity.Text;
+                DateTime qurentTime = DateTime.Now;
+                addressInfoDTO.RowInsertTime = qurentTime;
+
+                addressInfoDTO.RowUpdateTime = DateTime.Now;
+                _addressInfoAccount.Add(addressInfoDTO);
+                _addressInfoAccount.ReadDB();
+                int qurentID = 0;
+                foreach (var address in _addressInfoAccount.GetAll())
+                {
+                    if (Convert.ToString(qurentTime) == Convert.ToString(address.RowInsertTime))
+                    {
+                        qurentID = address.AddressID;
+                    }
+                }
+
+                InfoDTO infoDTO = new InfoDTO();
+                infoDTO.CountOfVisit = countOfVisitStr;
+                infoDTO.Discount = discountStr;
+                DateTime qurent1Time = DateTime.Now;
+                infoDTO.RowInsertTime = qurent1Time;
+                infoDTO.RowUpdateTime = DateTime.Now;
+
+                //infoDTO.InfoID =InfoIDStr;
+                infoDTO.AddressID = qurentID;
+                _infoAccount.Add(infoDTO);
+                _infoAccount.ReadDB();
+                int qurent1ID = 0;
+                foreach (var inforn in _infoAccount.GetAll())
+                {
+                    if (Convert.ToString(qurent1Time) == Convert.ToString(inforn.RowInsertTime))
+                    {
+                        qurent1ID = inforn.InfoID;
+                    }
+                }
+                ClientDTO clients = new ClientDTO();
+                clients.FirstName = textBoxFirstName.Text;
+                clients.LastName = textBoxLastName.Text;
+                clients.Login = textBoxLogin.Text;
+                clients.Password = textBoxPassword.Password;
+                clients.InfoID = qurent1ID;
+
+                clients.RowInsertTime = DateTime.Now;
+                clients.RowUpdateTime = DateTime.Now;
+
+                _clientAccount.Add(clients);
+
+                MessageBox.Show("Account created", "Information");
+                this.Hide();
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+            }
         }
     }
 }
