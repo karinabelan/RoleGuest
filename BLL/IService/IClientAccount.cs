@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace WinFormRoleGuest.Interface
+namespace BLL.Interface
 {
     public interface IClientAccount
     {
@@ -14,6 +14,7 @@ namespace WinFormRoleGuest.Interface
         ClientDTO GetByID(int ID);
         void Add(ClientDTO user);
         void Change(string newpass, string log, string fn);
+        ClientDTO GetObj(string IdT);
         void ReadDB();
     }
 }

@@ -1,7 +1,7 @@
-﻿using DAL.Interface;
+﻿using BLL.Interface;
+using DAL.Interface;
 using DTO;
 using System.Collections.Generic;
-using WinFormRoleGuest.Interface;
 
 namespace WinFormRoleGuest.BLL
 {
@@ -30,6 +30,11 @@ namespace WinFormRoleGuest.BLL
         public ClientDTO GetByID(int ID)
         {
            return _clients.GetByID(ID);
+        }
+
+        public ClientDTO GetObj(string IdT)
+        {
+            return _clients.GetObj(IdT);
         }
 
         public void ReadDB()

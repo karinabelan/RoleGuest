@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormRoleGuest.Interface
+namespace BLL.Interface
 {
     public interface IInfoAccount
     {

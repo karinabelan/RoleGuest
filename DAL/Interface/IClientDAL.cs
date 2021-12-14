@@ -13,6 +13,7 @@ namespace DAL.Interface
         ClientDTO GetByID(int ID);
         void Add(ClientDTO user);
         void Change( string newpass, string log, string fn);
+        ClientDTO GetObj(string IdT);
         void ReadDB();
     }
 }

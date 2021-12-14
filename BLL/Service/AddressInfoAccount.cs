@@ -1,7 +1,8 @@
-﻿using DAL.Interface;
+﻿using BLL.Interface;
+using DAL.Interface;
 using DTO;
 using System.Collections.Generic;
-using WinFormRoleGuest.Interface;
+
 
 namespace WinFormRoleGuest.BLL
 

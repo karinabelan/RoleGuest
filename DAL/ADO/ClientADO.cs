@@ -119,5 +119,12 @@ namespace DAL.ADO
             }
             return clients[index];
         }
+
+        public ClientDTO GetObj(string IdT)
+        {
+            var tempObj = clients.Where(x => x.Login == IdT).SingleOrDefault();
+
+            return tempObj;
+        }
     }
 }
